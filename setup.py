@@ -24,8 +24,7 @@ setup(
   url='https://github.com/javiergarciaheras/AeroRoutes',   # Provide either the link to your github or to your website
   download_url = 'https://github.com/javiergarciaheras/AeroRoutes/archive/v_01.tar.gz',    # I explain this later on
   keywords=['Routes', 'Navigation', 'Loxodrome', 'Orthodrome', 'Trajectories'],   # Keywords that define your package best
-  install_requires=[            # I get to this in a second
-          'xarray',
+  install_requires=[
           'numpy',
       'matplotlib',
       'mpl_toolkits.basemap',
