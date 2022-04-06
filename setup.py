@@ -27,7 +27,6 @@ setup(
   install_requires=[
           'numpy',
       'matplotlib',
-      'mpl_toolkits.basemap',
       ],
   include_package_data=True,
   tests_require=["pytest"],
