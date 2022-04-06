@@ -22,7 +22,7 @@ class TestLoxodromic(unittest.TestCase):
         self.assertEqual(len(lons), 100, 'longitude length is not right')
         self.assertEqual(lons[50], 69.1374914983165, 'longitude index 50 is not right')
         self.assertEqual(len(lats), 100, 'latitude length is not right')
-        self.assertEqual(round(lats[50], 10), 38.1480178816, 'latitude index 50 is not right')
+        self.assertEqual(round(lats[50], 10), 38.1480178817, 'latitude index 50 is not right')
         self.assertEqual(np.sum(lons), 6841.044305555556, 'Sum longitudes is not right')
         self.assertEqual(np.sum(lats), 3815.8871159935607, 'Sum latitudes is not right')
 
