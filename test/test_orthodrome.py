@@ -24,7 +24,7 @@ class TestOrtodromic(unittest.TestCase):
         self.assertEqual(len(lats), 100, 'latitude length is not right')
         self.assertEqual(lats[50], 68.5359501601219, 'latitude index 50 is not right')
         self.assertEqual(np.sum(lons), 6841.044305555556, 'Sum longitudes is not right')
-        self.assertEqual(np.sum(lats), 6062.167059407642, 'Sum latitudes is not right')
+        self.assertEqual(round(np.sum(lats), 10), 6062.1670594076, 'Sum latitudes is not right')
 
     def test_distance(self):
         distance = self.ortographic.get_distance_km()
