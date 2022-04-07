@@ -1,8 +1,8 @@
 import unittest
 import numpy as np
 from aeroroutes.routes import ComputeOrto
-from aeroroutes.tools import convert_dms_to_dec, plot_routes
-
+from aeroroutes.tools import convert_dms_to_dec
+from aeroroutes.tools import plot_routes
 
 class TestOrtodromic(unittest.TestCase):
 

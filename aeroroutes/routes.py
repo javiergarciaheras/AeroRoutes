@@ -13,8 +13,8 @@ class ComputeOrto(object):
         e = np.array([[y_p, z_p], [y_q, z_q]])
         f = - np.array([x_p, x_q])
         bc = np.linalg.inv(e) @ f
-        b = bc[0]
-        c = bc[1]
+        self.b = bc[0]
+        self.c = bc[1]
 
         # Also belong to the sphere:
         # x = R*cos(lat)*cos(lon)
@@ -23,7 +23,7 @@ class ComputeOrto(object):
         # Then lat as a function of lon is:
         # lat = atan2(-(cos(lon)+B*sin(lon)),C)
         self.lon_deg = np.linspace(initial_wp[0], final_wp[0], num_legs)
-        self.lat_deg = np.arctan(-(np.cos(self.lon_deg * d2r) + (b * np.sin(self.lon_deg * d2r))) / c) * r2d
+        self.lat_deg = np.arctan(-(np.cos(self.lon_deg * d2r) + (self.b * np.sin(self.lon_deg * d2r))) / self.c) * r2d
 
         # r_p · r_q = R^2*cos(theta) where theta is the angle of the arc between point P and Q
         theta_rad = np.arccos((x_p * x_q + y_p * y_q + z_p * z_q) / R_earth_km ** 2)
@@ -41,9 +41,13 @@ class ComputeOrto(object):
     def get_distance_km(self):
         return self.d_km
 
+    def get_latitude(self, longitude_deg):
+        return np.arctan(-(np.cos(longitude_deg * d2r) + (self.b * np.sin(longitude_deg * d2r))) / self.c) * r2d
 
 class ComputeLoxo(object):
     def __init__(self, initial_wp, final_wp, num_legs=100):
+        self.ini_lon_deg = initial_wp[0]
+        self.ini_lat_deg = initial_wp[1]
         # the geographic track is constant and unknown
         gamma_rad = np.arctan((final_wp[0] - initial_wp[0]) * d2r / (
                     np.arctanh(np.sin(final_wp[1] * d2r)) - np.arctanh(np.sin(initial_wp[1] * d2r))))
@@ -65,3 +69,7 @@ class ComputeLoxo(object):
     def get_distance_km(self):
         return self.d_km
 
+    def get_latitude(self, longitude_deg):
+        return np.arcsin(np.tanh(
+            np.arctanh(np.sin(self.ini_lat_deg * d2r)) + (longitude_deg * d2r - self.ini_lon_deg * d2r) / np.tan(
+                self.gamma_deg*d2r))) * r2d
