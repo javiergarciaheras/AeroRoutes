@@ -37,7 +37,7 @@ class TestOrtodromic2(unittest.TestCase):
 
     def test_get_latitude(self):
         lat = self.ortographic.get_latitude(-50)
-        self.assertEqual(lat, 57.42977387337658, 'Loxodrome latitude at W50 is not right')
+        self.assertEqual(lat, 57.42977387337658, 'Orthodrome latitude at W50 is not right')
 
 
     def test_plot_Lamber_Conformal(self):

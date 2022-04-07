@@ -37,7 +37,7 @@ class TestLoxodromic2(unittest.TestCase):
 
     def test_get_latitude(self):
         lat = self.loxodromic.get_latitude(-50)
-        self.assertEqual(lat, 39.37071946912703, 'Loxodrome latitude at W50 is not right')
+        self.assertEqual(round(lat, 10), 39.3707194691, 'Loxodrome latitude at W50 is not right')
 
     def test_plot_mercator(self):
         # https://matplotlib.org/basemap/users/
