@@ -4,7 +4,7 @@ from aeroroutes.routes import ComputeLoxo
 from aeroroutes.tools import convert_dms_to_dec
 from aeroroutes.tools import plot_routes
 
-class TestLoxodromic2(unittest.TestCase):
+class TestLoxodrome2(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):
@@ -16,10 +16,10 @@ class TestLoxodromic2(unittest.TestCase):
         LEMD_lat = convert_dms_to_dec(40, 28, 20, 'N')
 
 
-        cls.loxodromic = ComputeLoxo([KSFO_lon, KSFO_lat], [LEMD_lon, LEMD_lat], 100)
+        cls.loxodrome = ComputeLoxo([KSFO_lon, KSFO_lat], [LEMD_lon, LEMD_lat], 100)
 
     def test_route(self):
-        lons, lats = self.loxodromic.get_route()
+        lons, lats = self.loxodrome.get_route()
         self.assertEqual(len(lons), 100, 'longitude length is not right')
         self.assertEqual(lons[50], -62.36798260381593, 'longitude index 50 is not right')
         self.assertEqual(len(lats), 100, 'latitude length is not right')
@@ -28,15 +28,15 @@ class TestLoxodromic2(unittest.TestCase):
         self.assertEqual(np.sum(lats), 3905.506607398399, 'Sum latitudes is not right')
 
     def test_distance(self):
-        distance = self.loxodromic.get_distance_km()
+        distance = self.loxodrome.get_distance_km()
         self.assertEqual(distance, 10263.148676129978, 'Loxodrome distance is not right')
 
     def test_arc_between_points(self):
-        gamma = self.loxodromic.get_geographic_track()
+        gamma = self.loxodrome.get_geographic_track()
         self.assertEqual(gamma, 88.22846925638366, 'Loxodrome geographic track is not right')
 
     def test_get_latitude(self):
-        lat = self.loxodromic.get_latitude(-50)
+        lat = self.loxodrome.get_latitude(-50)
         self.assertEqual(round(lat, 10), 39.3707194691, 'Loxodrome latitude at W50 is not right')
 
     def test_plot_mercator(self):
@@ -50,7 +50,7 @@ class TestLoxodromic2(unittest.TestCase):
         # resolution = 'c' means use crude resolution coastlines.
         kwargs = {"projection": 'merc', "llcrnrlat": 20, "urcrnrlat": 80, "llcrnrlon": -130,
                   "urcrnrlon": 0, "lat_ts": 20, "resolution": 'c'}
-        plot_routes(self.loxodromic.lon_deg, self.loxodromic.lat_deg,
+        plot_routes(self.loxodrome.lon_deg, self.loxodrome.lat_deg,
                     parallels=np.arange(30., 91., 30.),
                     meridians=np.arange(-120., 1., 60.), **kwargs)
 

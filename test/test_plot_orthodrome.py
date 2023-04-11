@@ -4,7 +4,7 @@ from aeroroutes.routes import ComputeOrto
 from aeroroutes.tools import convert_dms_to_dec
 from aeroroutes.tools import plot_routes
 
-class TestOrtodromic(unittest.TestCase):
+class TestOrthodromePlot(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):
@@ -15,7 +15,7 @@ class TestOrtodromic(unittest.TestCase):
         RJAA_lon = convert_dms_to_dec(140, 23, 17.66, 'E')
         RJAA_lat = convert_dms_to_dec(35, 46, 24.78, 'N')
 
-        cls.ortographic = ComputeOrto([LEMD_lon, LEMD_lat], [RJAA_lon, RJAA_lat], 100)
+        cls.orthodrome = ComputeOrto([LEMD_lon, LEMD_lat], [RJAA_lon, RJAA_lat], 100)
 
     def test_plot_mercator(self):
         # https://matplotlib.org/basemap/users/
@@ -28,7 +28,7 @@ class TestOrtodromic(unittest.TestCase):
         # resolution = 'c' means use crude resolution coastlines.
         kwargs = {"projection": 'merc', "llcrnrlat": 20, "urcrnrlat": 80, "llcrnrlon": -20,
                   "urcrnrlon": 150, "lat_ts": 20, "resolution": 'c'}
-        plot_routes(self.ortographic.lon_deg, self.ortographic.lat_deg,
+        plot_routes(self.orthodrome.lon_deg, self.orthodrome.lat_deg, title='ortho merc',
                     parallels=np.arange(30., 91., 30.),
                     meridians=np.arange(-10., 181., 60.), **kwargs)
 
@@ -44,7 +44,7 @@ class TestOrtodromic(unittest.TestCase):
         # than 1000 km^2 in area.
         kwargs = {"projection": 'lcc', "width": 12000000, "height": 9000000, "rsphere": (6378137.00, 6356752.3142),
                   "resolution": 'l', "area_thresh": 1000., "lat_1": 45, "lat_2": 55, "lat_0": 50, "lon_0": 80.}
-        plot_routes(self.ortographic.lon_deg, self.ortographic.lat_deg,
+        plot_routes(self.orthodrome.lon_deg, self.orthodrome.lat_deg, title='ortho lcc',
                     parallels=np.arange(30., 91., 30.),
                     meridians=np.arange(-10., 181., 60.), **kwargs)
 

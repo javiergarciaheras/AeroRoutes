@@ -44,13 +44,14 @@ class ComputeOrto(object):
     def get_latitude(self, longitude_deg):
         return np.arctan(-(np.cos(longitude_deg * d2r) + (self.b * np.sin(longitude_deg * d2r))) / self.c) * r2d
 
+
 class ComputeLoxo(object):
     def __init__(self, initial_wp, final_wp, num_legs=100):
         self.ini_lon_deg = initial_wp[0]
         self.ini_lat_deg = initial_wp[1]
         # the geographic track is constant and unknown
         gamma_rad = np.arctan((final_wp[0] - initial_wp[0]) * d2r / (
-                    np.arctanh(np.sin(final_wp[1] * d2r)) - np.arctanh(np.sin(initial_wp[1] * d2r))))
+                np.arctanh(np.sin(final_wp[1] * d2r)) - np.arctanh(np.sin(initial_wp[1] * d2r))))
         self.gamma_deg = gamma_rad * r2d
 
         self.lon_deg = np.linspace(initial_wp[0], final_wp[0], num_legs)
@@ -72,4 +73,4 @@ class ComputeLoxo(object):
     def get_latitude(self, longitude_deg):
         return np.arcsin(np.tanh(
             np.arctanh(np.sin(self.ini_lat_deg * d2r)) + (longitude_deg * d2r - self.ini_lon_deg * d2r) / np.tan(
-                self.gamma_deg*d2r))) * r2d
+                self.gamma_deg * d2r))) * r2d

@@ -10,28 +10,29 @@ def convert_dms_to_dec(dd, mm, ss, nswe):
     :rtype: float
     """
     if nswe == 'N' or nswe == 'E':
-        decimal_deg = dd + mm/60.0 + ss/3600.0
+        decimal_deg = dd + mm / 60.0 + ss / 3600.0
     else:
         decimal_deg = -(dd + mm / 60.0 + ss / 3600.0)
 
     return decimal_deg
 
 
-def plot_routes(lons, lats, parallels=np.arange(30., 91., 30.),
-                meridians=np.arange(-10., 181., 60.), **kwargs):
+def plot_routes(lons, lats, title='Map', parallels=np.arange(30., 91., 30.), meridians=np.arange(-10., 181., 60.), **kwargs):
     # https://matplotlib.org/basemap/api/basemap_api.html
 
     m = Basemap(**kwargs)
     m.drawcoastlines()
-    #m.fillcontinents(color='coral', lake_color='aqua')
+    # m.fillcontinents(color='coral', lake_color='aqua')
     # draw parallels and meridians.
     m.drawparallels(parallels)
     m.drawmeridians(meridians)
-    #m.drawmapboundary(fill_color='aqua')
+    # m.drawmapboundary(fill_color='aqua')
     x, y = m(lons, lats)
 
     m.plot(x, y, marker=None, color='b')
-
+    plt.title(title)
+    plt.xlabel('Longitude (deg)')
+    plt.ylabel('Latitude (deg)')
     plt.show()
 
 
@@ -40,4 +41,3 @@ def convert2_spherical(lon_deg, lat_deg):
     y = R_earth_km * np.cos(lat_deg * d2r) * np.sin(lon_deg * d2r)
     z = R_earth_km * np.sin(lat_deg * d2r)
     return x, y, z
-

@@ -4,7 +4,7 @@ from aeroroutes.routes import ComputeLoxo
 from aeroroutes.tools import convert_dms_to_dec
 
 
-class TestLoxodromic(unittest.TestCase):
+class TestLoxodrome(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):
@@ -15,10 +15,10 @@ class TestLoxodromic(unittest.TestCase):
         RJAA_lon = convert_dms_to_dec(140, 23, 17.66, 'E')
         RJAA_lat = convert_dms_to_dec(35, 46, 24.78, 'N')
 
-        cls.loxodromic = ComputeLoxo([LEMD_lon, LEMD_lat], [RJAA_lon, RJAA_lat], 100)
+        cls.loxodrome = ComputeLoxo([LEMD_lon, LEMD_lat], [RJAA_lon, RJAA_lat], 100)
 
     def test_route(self):
-        lons, lats = self.loxodromic.get_route()
+        lons, lats = self.loxodrome.get_route()
         self.assertEqual(len(lons), 100, 'longitude length is not right')
         self.assertEqual(lons[50], 69.1374914983165, 'longitude index 50 is not right')
         self.assertEqual(len(lats), 100, 'latitude length is not right')
@@ -27,11 +27,11 @@ class TestLoxodromic(unittest.TestCase):
         self.assertEqual(np.sum(lats), 3815.8871159935607, 'Sum latitudes is not right')
 
     def test_distance(self):
-        distance = self.loxodromic.get_distance_km()
+        distance = self.loxodrome.get_distance_km()
         self.assertEqual(distance, 12593.754742038487, 'Loxodrome distance is not right')
 
     def test_arc_between_points(self):
-        gamma = self.loxodromic.get_geographic_track()
+        gamma = self.loxodrome.get_geographic_track()
         self.assertEqual(gamma, -87.61140980228046, 'Loxodrome geographic track is not right')
 
 

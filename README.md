@@ -17,6 +17,7 @@ AeroRoutes is a library to compute the main features in aircraft routes. Now it 
 1. Create the latitude and longitude of both origin and destination. If you know only the coordinates in degrees, minutes and seconds you can use the function convert_dms_to_dec from aeroroutes.tools.
 
 ```python
+from aeroroutes.tools import convert_dms_to_dec
 # Madrid:
 LEMD_lon = convert_dms_to_dec(3, 34, 2.47, 'W')
 LEMD_lat = convert_dms_to_dec(40, 29, 37.62, 'N')
@@ -28,6 +29,8 @@ RJAA_lat = convert_dms_to_dec(35, 46, 24.78, 'N')
 2. Create and instance to aeroroutes.routes.ComputeOrto or aeroroutes.routes.ComputeLoxo including origin and destination lon lat as a list, also de number of legs in your route could be also defined.
 
 ```python
+from aeroroutes.routes import ComputeOrto
+from aeroroutes.routes import ComputeLoxo
 # Orthodrome:
 ortographic = ComputeOrto([LEMD_lon, LEMD_lat], [RJAA_lon, RJAA_lat], 100)
 
@@ -81,6 +84,9 @@ gamma_o = loxodromic.get_geographic_track()
 - Plot using Mercator projection. ([matplotlib basemap website](https://matplotlib.org/basemap/users/merc.html)). Parallels, and meridians inputs are the values you want to see on the map, as a numpy array.
 
 ```python
+from aeroroutes.tools import plot_routes
+import numpy as np
+
 kwargs = {"projection": 'merc', "llcrnrlat": 20, "urcrnrlat": 80, "llcrnrlon": -20,
                   "urcrnrlon": 150, "lat_ts": 20, "resolution": 'c'}
 
@@ -99,6 +105,8 @@ plot_routes(loxodromic.lon_deg, loxodromic.lat_deg,
 - Plot using Lamber Conformal projection. ([matplotlib basemap website](https://matplotlib.org/basemap/users/lcc.html)). Parallels, and meridians inputs are the values you want to see on the map, as a numpy array.
 
 ```python
+from aeroroutes.tools import plot_routes
+import numpy as np
 kwargs = {"projection": 'lcc', "width": 12000000, "height": 9000000, "rsphere": (6378137.00, 6356752.3142),
                   "resolution": 'l', "area_thresh": 1000., "lat_1": 45, "lat_2": 55, "lat_0": 50, "lon_0": 80.}
 
