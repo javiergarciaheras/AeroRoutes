@@ -3,8 +3,22 @@
 [![GitHub](https://img.shields.io/github/license/javiergarciaheras/AeroRoutes)]()
 [![GitHub release (latest by date)](https://img.shields.io/github/v/release/javiergarciaheras/AeroRoutes)]()
 
-## What is AeroRoutes?
-AeroRoutes is a library to compute the main features in aircraft routes. Now it is supported loxodrome and orthodrome routes. The primary purpose is purely academic to show students their different characteristics.
+# AeroRoutes 🛫 
+AeroRoutes is a library for computing the main features of aircraft routes. It now supports loxodrome and orthodrome routes. The primary purpose is purely academic: to show students their different characteristics.
+
+## 🚀 Try the Demo Notebook  
+An interactive Jupyter Notebook is available to demonstrate how to use AeroRoutes:  
+
+👉 **[Run the Demo Notebook](examples/aeroroutes_demo.ipynb)**  
+
+[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/javiergarciaheras/AeroRoutes/main?filepath=examples/aeroroutes_demo.ipynb)  
+
+---
+
+## 📖 Installation  
+```bash
+pip install aeroroutes
+
 
 ## How to run the library
 
